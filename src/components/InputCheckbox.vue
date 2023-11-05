@@ -1,16 +1,20 @@
 <script lang="ts" setup>
-defineProps<{
+import { useField } from 'vee-validate';
+
+const props = defineProps<{
   name: string;
   label?: string;
   checkedValue?: any;
   uncheckedValue?: any;
 }>();
 
-const value = defineModel();
+const { value, errorMessage } = useField(() => props.name, undefined, {
+  type: 'checkbox',
+});
 </script>
 
 <template>
-  <div class="InputCheckbox">
+  <div class="InputCheckbox" :class="{ 'has-error': errorMessage }">
     <div class="InputCheckbox__Control">
       <input :id="name" :name="name" type="checkbox" tabindex="-1" />
 
@@ -47,12 +51,14 @@ const value = defineModel();
         {{ label }}
       </label>
     </slot>
+
+    <div class="error-message">{{ errorMessage }}</div>
   </div>
 </template>
 
 <style lang="postcss" scoped>
 .InputCheckbox {
-  @apply inline-flex items-center relative;
+  @apply flex items-center relative;
   padding-bottom: 1.5rem;
 
   &__Control {
@@ -67,6 +73,11 @@ const value = defineModel();
     }
   }
 
+  .error-message {
+    @apply absolute left-0 text-sm text-red-500;
+    bottom: calc(-1.5 * 1em);
+  }
+
   &.has-error {
     .InputCheckbox__Control {
       input {
@@ -75,7 +86,7 @@ const value = defineModel();
     }
   }
 
-  &__Error {
+  .error-message {
     @apply absolute bottom-0 left-0 text-sm text-red-600;
   }
 }

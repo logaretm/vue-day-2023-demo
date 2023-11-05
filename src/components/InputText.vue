@@ -1,16 +1,18 @@
 <script setup lang="ts">
-defineProps<{
+import { useField } from 'vee-validate';
+
+const props = defineProps<{
   type?: string;
   name: string;
   label: string;
   placeholder?: string;
 }>();
 
-const value = defineModel<string | undefined>();
+const { value, errorMessage } = useField(() => props.name);
 </script>
 
 <template>
-  <div class="TextInput">
+  <div class="InputText" :class="{ 'has-error': errorMessage }">
     <label :for="name">{{ label }}</label>
     <input
       :name="name"
@@ -19,6 +21,8 @@ const value = defineModel<string | undefined>();
       v-model="value"
       :placeholder="placeholder"
     />
+
+    <div class="error-message">{{ errorMessage }}</div>
   </div>
 </template>
 

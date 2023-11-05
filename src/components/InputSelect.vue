@@ -1,4 +1,5 @@
 <script setup lang="ts" generic="T">
+import { useField } from 'vee-validate';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -9,7 +10,7 @@ const props = defineProps<{
   options: { value: T; label: string }[];
 }>();
 
-const value = defineModel<T | undefined>();
+const { value, errorMessage } = useField(() => props.name);
 
 const selectedItem = computed(() => {
   return props.options.find((opt) => opt.value === value.value);
@@ -23,7 +24,7 @@ function onChange(e: Event) {
 </script>
 
 <template>
-  <div class="InputSelect">
+  <div class="InputSelect" :class="{ 'has-error': errorMessage }">
     <label :for="name">{{ label }}</label>
 
     <selectlist
@@ -69,6 +70,8 @@ function onChange(e: Event) {
         </option>
       </listbox>
     </selectlist>
+
+    <div class="error-message">{{ errorMessage }}</div>
   </div>
 </template>
 
