@@ -3,11 +3,10 @@ defineProps<{
   type?: string;
   name: string;
   label: string;
-  successMessage?: string;
   placeholder?: string;
 }>();
 
-const value = defineModel<string>();
+const value = defineModel<string | undefined>();
 </script>
 
 <template>
@@ -35,7 +34,7 @@ const value = defineModel<string>();
   input {
     @apply text-gray-800 rounded-md border-2 border-transparent py-3 px-4 w-full bg-gray-100 focus:outline-none transition-colors duration-200 focus:border-blue-500;
   }
-  .help-message {
+  .error-message {
     @apply absolute left-0 text-sm text-red-500;
     bottom: calc(-1.5 * 1em);
   }
@@ -43,10 +42,6 @@ const value = defineModel<string>();
   &.has-error {
     input {
       @apply bg-red-100 text-red-600 focus:border-red-500;
-    }
-
-    .help-message {
-      @apply text-red-500;
     }
   }
 }

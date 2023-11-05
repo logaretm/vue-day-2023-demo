@@ -5,12 +5,11 @@ const props = defineProps<{
   type?: string;
   name: string;
   label: string;
-  successMessage?: string;
   placeholder?: string;
   options: { value: T; label: string }[];
 }>();
 
-const value = defineModel<T>();
+const value = defineModel<T | undefined>();
 
 const selectedItem = computed(() => {
   return props.options.find((opt) => opt.value === value.value);
@@ -105,20 +104,14 @@ function onChange(e: Event) {
     }
   }
 
-  .help-message {
+  .error-message {
     @apply absolute left-0 text-sm text-red-500;
     bottom: calc(-1.5 * 1em);
   }
 
   &.has-error {
     &__Control {
-      &::button {
-        @apply bg-red-100 text-red-600 focus:border-red-500;
-      }
-    }
-
-    .help-message {
-      @apply text-red-500;
+      @apply bg-red-100 text-red-600 focus:border-red-500;
     }
   }
 }

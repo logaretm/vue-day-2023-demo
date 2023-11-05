@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import InputCheckbox from './components/InputCheckbox.vue';
 import InputText from './components/InputText.vue';
 import InputSelect from './components/InputSelect.vue';
 import BaseButton from './components/BaseButton.vue';
+import { ref } from 'vue';
 
 const accountTypeOptions = [
   { value: 'personal', label: 'Personal' },
@@ -16,7 +16,7 @@ const values = ref<{
   email?: string;
   password?: string;
   passwordConfirm?: string;
-  accountType?: 'personal' | 'business';
+  accountType?: string;
   terms?: boolean;
 }>({});
 </script>
@@ -53,5 +53,7 @@ const values = ref<{
     />
 
     <BaseButton>Submit</BaseButton>
+
+    <pre>{{ values }}</pre>
   </form>
 </template>
