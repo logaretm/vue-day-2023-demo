@@ -23,11 +23,11 @@ function onChange(e: Event) {
 </script>
 
 <template>
-  <div class="SelectInput">
+  <div class="InputSelect">
     <label :for="name">{{ label }}</label>
 
     <selectlist
-      class="SelectInput__Control"
+      class="InputSelect__Control"
       :name="name"
       :id="name"
       @change="onChange"
@@ -73,7 +73,7 @@ function onChange(e: Event) {
 </template>
 
 <style scoped lang="postcss">
-.SelectInput {
+.InputSelect {
   position: relative;
   margin-bottom: calc(1em * 1.5);
   width: 100%;
@@ -110,7 +110,7 @@ function onChange(e: Event) {
   }
 
   &.has-error {
-    &__Control {
+    .InputSelect__Control {
       @apply bg-red-100 text-red-600 focus:border-red-500;
     }
   }

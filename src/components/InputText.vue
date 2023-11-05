@@ -23,7 +23,7 @@ const value = defineModel<string | undefined>();
 </template>
 
 <style scoped lang="postcss">
-.TextInput {
+.InputText {
   @apply relative w-full;
   margin-bottom: calc(1em * 1.5);
 
