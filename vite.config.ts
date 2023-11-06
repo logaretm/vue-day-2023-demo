@@ -5,6 +5,11 @@ const customElements = ['selectlist', 'listbox', 'selectedoption'];
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
   plugins: [
     vue({
       template: {

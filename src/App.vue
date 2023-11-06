@@ -1,61 +1,63 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import InputCheckbox from './components/InputCheckbox.vue';
-import InputText from './components/InputText.vue';
-import InputSelect from './components/InputSelect.vue';
-import BaseButton from './components/BaseButton.vue';
-
-const accountTypeOptions = [
-  { value: 'personal', label: 'Personal' },
-  { value: 'business', label: 'Business' },
-];
-
-const values = ref<{
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  password?: string;
-  passwordConfirm?: string;
-  accountType?: string;
-  terms?: boolean;
-}>({});
-
-const onSubmit = () => {
-  console.log(values.value);
-};
-</script>
-
 <template>
-  <form @submit="onSubmit" novalidate>
-    <InputText v-model="values.firstName" name="firstName" label="First name" />
-    <InputText v-model="values.lastName" name="lastName" label="Last name" />
-    <InputText v-model="values.email" name="email" label="Email" type="email" />
-    <InputText
-      v-model="values.password"
-      name="password"
-      label="Password"
-      type="password"
-    />
-    <InputText
-      v-model="values.passwordConfirm"
-      name="passwordConfirm"
-      label="Password confirmation"
-      type="password"
-    />
+  <div class="flex items-stretch h-screen w-screen">
+    <div
+      class="h-full bg-slate-800 px-3 flex flex-col justify-center space-y-8"
+    >
+      <RouterLink
+        to="/"
+        class="p-1 rounded-md hover:bg-black"
+        title="Form intro"
+      >
+        <svg
+          fill="none"
+          class="w-7 h-7 text-emerald-500"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 8.25V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18V8.25m-18 0V6a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6zM7.5 6h.008v.008H7.5V6zm2.25 0h.008v.008H9.75V6z"
+          ></path>
+        </svg>
+      </RouterLink>
 
-    <InputSelect
-      v-model="values.accountType"
-      name="accountType"
-      label="Choose an account type"
-      :options="accountTypeOptions"
-    />
+      <RouterLink
+        to="/filters"
+        class="p-1 rounded-md hover:bg-black"
+        title="Filters component"
+      >
+        <svg
+          class="w-7 h-7 text-emerald-500"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+          ></path>
+        </svg>
+      </RouterLink>
+    </div>
 
-    <InputCheckbox
-      v-model="values.terms"
-      name="terms"
-      label="I agree to terms and conditions"
-    />
-
-    <BaseButton>Submit</BaseButton>
-  </form>
+    <div class="flex-grow flex-shrink p-10">
+      <RouterView />
+    </div>
+  </div>
 </template>
+
+<script setup lang="ts"></script>
+
+<style lang="postcss" scoped>
+.router-link-active {
+  @apply bg-black ring-1 ring-emerald-500;
+}
+</style>
