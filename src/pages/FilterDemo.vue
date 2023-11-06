@@ -1,36 +1,61 @@
 <template>
-  <div class="flex items-center justify-center h-full w-full">
-    <InputFilter name="filter" :operators="operators" :filters="filters" />
-  </div>
+  <form
+    class="flex items-center justify-center h-full w-full"
+    @submit="onSubmit"
+  >
+    <InputFilter
+      name="filter"
+      :operators="operatorsWithLabels"
+      :filters="filtersWithLabels"
+    />
+  </form>
 </template>
 
 <script setup lang="ts">
 import InputFilter from '@/components/InputFilter.vue';
-import { LabeledValue } from '@/types';
+import { toTypedSchema } from '@vee-validate/zod';
+import { snakeCase, upperFirst } from 'lodash-es';
 import { useForm } from 'vee-validate';
+import { z } from 'zod';
 
-useForm();
+const operators = [
+  'equals',
+  'notEquals',
+  'contains',
+  'startsWith',
+  'endsWith',
+  'matches',
+] as const;
 
-const operators: LabeledValue<
-  'eq' | 'neq' | 'contains' | 'startsWith' | 'endsWith' | 'matches'
->[] = [
-  { label: 'Equals', value: 'eq' },
-  { label: 'Not equals', value: 'neq' },
-  { label: 'Contains', value: 'contains' },
-  { label: 'Starts with', value: 'startsWith' },
-  { label: 'Ends with', value: 'endsWith' },
-  { label: 'Matches', value: 'matches' },
-];
+const filters = [
+  'name',
+  'email',
+  'phone',
+  'address',
+  'city',
+  'state',
+  'zip',
+] as const;
 
-const filters: LabeledValue<
-  'name' | 'email' | 'phone' | 'address' | 'city' | 'state' | 'zip'
->[] = [
-  { label: 'Name', value: 'name' },
-  { label: 'Email', value: 'email' },
-  { label: 'Phone', value: 'phone' },
-  { label: 'Address', value: 'address' },
-  { label: 'City', value: 'city' },
-  { label: 'State', value: 'state' },
-  { label: 'Zip', value: 'zip' },
-];
+function createLabel(value: string) {
+  return snakeCase(value).split('_').join(' ');
+}
+
+const operatorsWithLabels = operators.map((operator) => ({
+  value: operator,
+  label: createLabel(operator),
+}));
+
+const filtersWithLabels = filters.map((filter) => ({
+  value: filter,
+  label: upperFirst(createLabel(filter)),
+}));
+
+const { handleSubmit } = useForm({
+  validationSchema: toTypedSchema(z.object({})),
+});
+
+const onSubmit = handleSubmit((values) => {
+  console.log(values);
+});
 </script>
