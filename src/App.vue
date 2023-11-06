@@ -1,8 +1,6 @@
 <template>
   <div class="flex items-stretch h-screen w-screen">
-    <div
-      class="h-full bg-slate-800 px-3 flex flex-col justify-center space-y-8"
-    >
+    <div class="h-full bg-slate-800 px-3 flex flex-col justify-center gap-4">
       <RouterLink
         to="/"
         class="p-1 rounded-md hover:bg-black"

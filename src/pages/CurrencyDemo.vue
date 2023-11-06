@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
-import CurrencyInput from '@/components/CurrencyInput.vue';
+import InputCurrency from '@/components/InputCurrency.vue';
 import { useForm } from 'vee-validate';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -24,7 +24,7 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
   <form @submit="onSubmit">
-    <CurrencyInput name="amount" :options="currencyOptions" />
+    <InputCurrency label="Amount" name="amount" :options="currencyOptions" />
 
     <BaseButton>Submit</BaseButton>
   </form>
