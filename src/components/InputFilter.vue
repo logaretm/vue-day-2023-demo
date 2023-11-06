@@ -28,20 +28,20 @@ const { value } = useField<
       v-model="value[0]"
       :options="filters"
       placeholder="Select filter"
-      class="hover:bg-gray-200 px-4"
+      class="hover:bg-gray-200 px-4 flex-shrink-0"
     />
 
     <UnstyledSelect
       v-model="value[1]"
       :options="operators"
-      class="px-4 hover:bg-gray-200"
+      class="px-4 hover:bg-gray-200 flex-shrink-0"
       placeholder="Select operator"
     />
 
     <input
       type="text"
       v-model="value[2]"
-      class="bg-transparent text-sm px-4 focus:outline-none hover:bg-gray-200"
+      class="bg-transparent text-sm px-4 focus:outline-none hover:bg-gray-200 w-full flex-grow"
       placeholder="Enter value"
     />
   </div>
