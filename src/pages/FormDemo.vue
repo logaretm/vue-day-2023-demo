@@ -26,7 +26,7 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <form @submit="onSubmit" novalidate>
+  <form @submit.prevent="onSubmit" novalidate>
     <InputText v-model="values.firstName" name="firstName" label="First name" />
     <InputText v-model="values.lastName" name="lastName" label="Last name" />
     <InputText v-model="values.email" name="email" label="Email" type="email" />
