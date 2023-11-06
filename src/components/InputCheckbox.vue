@@ -1,20 +1,22 @@
-<script lang="ts" setup>
-import { useField } from 'vee-validate';
-
+<script lang="ts" setup generic="TChecked = boolean, TUnchecked = boolean">
 const props = defineProps<{
   name: string;
   label?: string;
-  checkedValue?: any;
-  uncheckedValue?: any;
+  checkedValue?: TChecked;
+  uncheckedValue?: TUnchecked;
 }>();
 
-const { value, errorMessage } = useField(() => props.name, undefined, {
-  type: 'checkbox',
-});
+const value = defineModel<TChecked | TUnchecked | undefined>();
+
+function toggleValue() {
+  const unchecked = props.uncheckedValue ?? (false as TUnchecked);
+  value.value =
+    value.value === props.checkedValue ? unchecked : props.checkedValue;
+}
 </script>
 
 <template>
-  <div class="InputCheckbox" :class="{ 'has-error': errorMessage }">
+  <div class="InputCheckbox">
     <div class="InputCheckbox__Control">
       <input :id="name" :name="name" type="checkbox" tabindex="-1" />
 
@@ -22,7 +24,7 @@ const { value, errorMessage } = useField(() => props.name, undefined, {
         class="InputCheckbox__Control__btn"
         :class="{ 'bg-blue-600 border-blue-600': value }"
         type="button"
-        @click="value = !value"
+        @click="toggleValue"
       >
         <svg
           fill="none"
@@ -51,8 +53,6 @@ const { value, errorMessage } = useField(() => props.name, undefined, {
         {{ label }}
       </label>
     </slot>
-
-    <div class="error-message">{{ errorMessage }}</div>
   </div>
 </template>
 
