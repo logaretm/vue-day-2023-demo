@@ -1,17 +1,17 @@
 <template>
-  <form
-    class="flex items-center justify-center h-full w-full"
-    @submit="onSubmit"
-  >
+  <form class="flex flex-col justify-center h-full w-full" @submit="onSubmit">
     <InputFilter
       name="filter"
       :operators="operatorsWithLabels"
       :filters="filtersWithLabels"
     />
+
+    <BaseButton class="mr-auto mt-4">Submit</BaseButton>
   </form>
 </template>
 
 <script setup lang="ts">
+import BaseButton from '@/components/BaseButton.vue';
 import InputFilter from '@/components/InputFilter.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { snakeCase, upperFirst } from 'lodash-es';
@@ -52,7 +52,15 @@ const filtersWithLabels = filters.map((filter) => ({
 }));
 
 const { handleSubmit } = useForm({
-  validationSchema: toTypedSchema(z.object({})),
+  validationSchema: toTypedSchema(
+    z.object({
+      filter: z.tuple([
+        z.enum(filters),
+        z.enum(operators),
+        z.string().nonempty(),
+      ]),
+    })
+  ),
 });
 
 const onSubmit = handleSubmit((values) => {

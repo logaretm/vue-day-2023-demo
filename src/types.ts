@@ -4,7 +4,7 @@ export interface LabeledValue<T extends string | number> {
 }
 
 export type FilterValue<
-  TFilter extends string | null | undefined = string,
-  TOperator extends string | null | undefined = string,
+  TFilter extends string | undefined = string,
+  TOperator extends string | undefined = string,
   TValue extends any = any
-> = [TFilter, TOperator, TValue];
+> = [TFilter | undefined, TOperator | undefined, TValue | undefined];
