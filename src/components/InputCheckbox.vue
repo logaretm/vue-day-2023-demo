@@ -9,9 +9,9 @@ const props = defineProps<{
 const value = defineModel<TChecked | TUnchecked | undefined>();
 
 function toggleValue() {
+  const checked = props.checkedValue ?? (true as TChecked);
   const unchecked = props.uncheckedValue ?? (false as TUnchecked);
-  value.value =
-    value.value === props.checkedValue ? unchecked : props.checkedValue;
+  value.value = value.value === checked ? unchecked : checked;
 }
 </script>
 
