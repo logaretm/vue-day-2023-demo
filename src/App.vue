@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-stretch h-screen w-screen">
+  <div class="flex items-stretch h-full w-full">
     <div class="h-full bg-slate-800 px-3 flex flex-col justify-center gap-4">
       <RouterLink
         to="/"
@@ -68,7 +68,7 @@
       </RouterLink>
     </div>
 
-    <div class="flex-grow flex-shrink p-10">
+    <div class="flex-grow flex-shrink p-10 overflow-auto">
       <RouterView />
     </div>
   </div>
