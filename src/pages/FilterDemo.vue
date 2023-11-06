@@ -7,6 +7,9 @@
 <script setup lang="ts">
 import InputFilter from '@/components/InputFilter.vue';
 import { LabeledValue } from '@/types';
+import { useForm } from 'vee-validate';
+
+useForm();
 
 const operators: LabeledValue<
   'eq' | 'neq' | 'contains' | 'startsWith' | 'endsWith' | 'matches'

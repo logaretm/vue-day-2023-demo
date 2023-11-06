@@ -31,12 +31,12 @@ function onChange(e: Event) {
       </span>
     </button>
 
-    <listbox>
+    <listbox class="rounded-md shadow-lg w-52 border border-gray-100">
       <option
         v-for="opt in options"
         :key="opt.value"
         :value="opt.value"
-        class="flex items-center"
+        class="flex items-center hover:bg-gray-100 rounded-md"
       >
         {{ opt.label }}
 
