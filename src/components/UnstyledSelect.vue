@@ -35,7 +35,7 @@ function onChange(e: Event) {
       <option
         disabled
         value=""
-        class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed"
+        class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed bg-white"
       >
         {{ placeholder || 'Select an option' }}
       </option>
@@ -44,7 +44,7 @@ function onChange(e: Event) {
         v-for="opt in options"
         :key="opt.value"
         :value="opt.value"
-        class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed bg-white"
+        class="flex items-center px-2 py-2 rounded-lg hover:bg-gray-100 focus:outline-none"
       >
         {{ opt.label }}
 
