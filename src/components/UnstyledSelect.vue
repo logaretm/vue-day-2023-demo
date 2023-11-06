@@ -33,10 +33,18 @@ function onChange(e: Event) {
 
     <listbox class="rounded-md shadow-lg w-52 border border-gray-100">
       <option
+        disabled
+        value=""
+        class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed"
+      >
+        {{ placeholder || 'Select an option' }}
+      </option>
+
+      <option
         v-for="opt in options"
         :key="opt.value"
         :value="opt.value"
-        class="flex items-center hover:bg-gray-100 rounded-md"
+        class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed bg-white"
       >
         {{ opt.label }}
 

@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends string | number">
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -31,8 +31,9 @@ function onChange(e: Event) {
       :name="name"
       :id="name"
       @change="onChange"
+      @input="onChange"
     >
-      <button type="selectlist" class="w-full h-full text-left">
+      <button type="selectlist" class="w-full h-full text-left py-3 px-4">
         <span v-if="selectedItem" class="text-gray-800">
           {{ selectedItem.label }}
         </span>
@@ -42,12 +43,22 @@ function onChange(e: Event) {
         </span>
       </button>
 
-      <listbox>
+      <listbox
+        class="px-1 py-1 border border-gray-200 shadow-lg rounded-lg w-52"
+      >
+        <option
+          disabled
+          value=""
+          class="flex items-center px-2 py-2 rounded-lg cursor-not-allowed bg-white"
+        >
+          {{ placeholder || 'Select an option' }}
+        </option>
+
         <option
           v-for="opt in options"
           :key="opt.value"
           :value="opt.value"
-          class="flex items-center"
+          class="flex items-center px-2 py-2 rounded-lg hover:bg-gray-200 cursor-pointer"
         >
           {{ opt.label }}
 
@@ -87,20 +98,8 @@ function onChange(e: Event) {
   &__Control {
     @apply text-gray-800 rounded-md border-2 border-transparent  w-full bg-gray-100 focus:outline-none transition-colors duration-200 focus:border-blue-500;
 
-    button {
-      @apply py-3 px-4;
-    }
-
-    &::listbox {
-      @apply px-4 py-2 border border-blue-500 block;
-    }
-
     &:open {
       @apply border-blue-500;
-    }
-
-    option {
-      @apply px-2 py-2 rounded-lg hover:bg-gray-200 cursor-pointer;
     }
   }
 
