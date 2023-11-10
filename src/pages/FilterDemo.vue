@@ -11,12 +11,13 @@
 </template>
 
 <script setup lang="ts">
+import { z } from 'zod';
 import BaseButton from '@/components/BaseButton.vue';
 import InputFilter from '@/components/InputFilter.vue';
+import { createLabel } from '@/utils';
 import { toTypedSchema } from '@vee-validate/zod';
-import { snakeCase, upperFirst } from 'lodash-es';
+import { upperFirst } from 'lodash-es';
 import { useForm } from 'vee-validate';
-import { z } from 'zod';
 
 const operators = [
   'equals',
@@ -36,10 +37,6 @@ const filters = [
   'state',
   'zip',
 ] as const;
-
-function createLabel(value: string) {
-  return snakeCase(value).split('_').join(' ');
-}
 
 const operatorsWithLabels = operators.map((operator) => ({
   value: operator,

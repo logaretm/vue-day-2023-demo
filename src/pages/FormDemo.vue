@@ -4,18 +4,20 @@ import InputCheckbox from '@/components/InputCheckbox.vue';
 import InputText from '@/components/InputText.vue';
 import InputSelect from '@/components/InputSelect.vue';
 import BaseButton from '@/components/BaseButton.vue';
+import { createLabel } from '@/utils';
 
-const accountTypeOptions = [
-  { value: 'personal', label: 'Personal' },
-  { value: 'business', label: 'Business' },
-];
+const accountTypes = ['personal', 'business'] as const;
+
+const accountTypeOptions = accountTypes.map((type) => ({
+  value: type,
+  label: createLabel(type),
+}));
 
 const values = ref<{
   firstName?: string;
   lastName?: string;
   email?: string;
   password?: string;
-  passwordConfirm?: string;
   accountType?: string;
   terms?: boolean;
 }>({});
@@ -34,12 +36,6 @@ const onSubmit = () => {
       v-model="values.password"
       name="password"
       label="Password"
-      type="password"
-    />
-    <InputText
-      v-model="values.passwordConfirm"
-      name="passwordConfirm"
-      label="Password confirmation"
       type="password"
     />
 
