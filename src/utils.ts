@@ -1,5 +1,5 @@
-import { snakeCase } from 'lodash-es';
+import { snakeCase, upperFirst } from 'lodash-es';
 
 export function createLabel(value: string) {
-  return snakeCase(value).split('_').join(' ');
+  return upperFirst(snakeCase(value).split('_').join(' '));
 }
